@@ -39,7 +39,7 @@
   "types": "index.d.ts",
   "scripts": {
     "test": "npm run test:eslint && npm run test:mocha && npm run test:karma && npm run test:dtslint && npm run test:exports",
-    "test:eslint": "node bin/ssl_hotfix.js eslint lib/**/*.js",
+    "test:eslint": "node bin/ssl_hotfix.js eslint -c .eslintrc.cjs lib/**/*.js",
     "test:dtslint": "dtslint --localTs node_modules/typescript/lib",
     "test:mocha": "node bin/ssl_hotfix.js mocha test/unit/**/*.js --timeout 30000 --exit",
     "test:exports": "node bin/ssl_hotfix.js mocha test/module/test.js --timeout 30000 --exit",
@@ -55,7 +55,8 @@
     "build": "gulp clear && cross-env NODE_ENV=production rollup -c -m",
     "examples": "node ./examples/server.js",
     "coveralls": "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "fix": "eslint --fix lib/**/*.js",
+    "fix": "eslint -c .eslintrc.cjs --fix lib/**/*.js",
+    "lint": "eslint -c .eslintrc.cjs lib/**/*.js",
     "prepare": "husky install && npm run prepare:hooks",
     "prepare:hooks": "npx husky set .husky/commit-msg \"npx commitlint --edit $1\"",
     "release:dry": "release-it --dry-run --no-npm",
